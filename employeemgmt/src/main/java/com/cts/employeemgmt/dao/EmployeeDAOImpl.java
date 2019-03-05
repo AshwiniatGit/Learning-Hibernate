@@ -51,47 +51,80 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public String updateEmployee(String id, Employee employee) {
+	public String updateEmployee(int id, Employee employee) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String deleteEmployee(String id) {
+	public String deleteEmployee(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Employee getEmployee(String id) {
-		// TODO Auto-generated method stub
+	public Employee getEmployee(int id) {
+		Session session= null;
+		
+		try{
+		session = sessionFactory.openSession();
+		
+		
+		Employee employee = session.load(Employee.class, id);
+		return employee;
+		
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		finally
+		{
+			if(session!=null)
+				session.close();
+		}
 		return null;
 	}
 
 	@Override
 	public List<Employee> getEmployeesByNames(String name) {
-		// TODO Auto-generated method stub
+		Session session= null;
+		String query ="from Empl where firstName = ?";
+		org.hibernate.query.Query<Employee> query2 = null;
+
+		try{
+		session = sessionFactory.openSession();
+		query2 = session.createQuery(query);
+		query2.setParameter(0, name);
+		List<Employee> list = query2.getResultList();
+		return list;
+		
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		finally
+		{
+			if(session!=null)
+				session.close();
+		}
 		return null;
 	}
 
 	@Override
 	public List<Employee> getEmployees() {
 		Session session= null;
-		Transaction transaction = null;
+		String query ="from Empl";
+		org.hibernate.query.Query<Employee> query2 = null;
+
 		try{
 		session = sessionFactory.openSession();
-		transaction = session.getTransaction();
+		query2 = session.createQuery(query);
+		List<Employee> list = query2.getResultList();
+		return list;
 		
-		transaction.begin();
-		String query ="from Empl";
-		session.save(employee);//insert 
-		transaction.commit();
-		return "success";
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-			if(transaction!=null)
-				transaction.rollback();
 		}
 		finally
 		{

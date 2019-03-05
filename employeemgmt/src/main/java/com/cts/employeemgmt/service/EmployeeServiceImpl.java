@@ -29,33 +29,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public String updateEmployee(String id, Employee employee) {
+	public String updateEmployee(int id, Employee employee) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String deleteEmployee(String id) {
+	public String deleteEmployee(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Employee getEmployee(String id) {
+	public Employee getEmployee(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getEmployee(id);
 	}
 
 	@Override
 	public List<Employee> getEmployeesByNames(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getEmployeesByNames(name);
 	}
 
 	@Override
 	public List<Employee> getEmployees() {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getEmployees();
 	}
 
 }
